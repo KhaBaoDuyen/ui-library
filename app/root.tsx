@@ -9,6 +9,8 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { Navbar } from "./components/navbar/navbar";
+import { Header } from "./components/header/header";
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,7 +44,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <Outlet />;
+	return (
+		<div className="h-screen w-screen">
+			<div className="sticky top-0 left-0 w-full">
+				<Header />
+			</div>
+			<div className="flex">
+				<div className="w-[15%] border-2">
+					<Navbar />
+				</div>
+
+				<main className="flex-1 p-5">
+					<Outlet />
+				</main>
+			</div>
+
+		</div>
+	);
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
